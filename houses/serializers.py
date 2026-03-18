@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import House, Room
 
 class HouseSerializer(serializers.ModelSerializer):
+    owner = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = House
         fields = ['id', 'name', 'location', 'description', 'owner']

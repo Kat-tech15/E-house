@@ -2,7 +2,7 @@ from decimal import Decimal, InvalidOperation
 
 from django.db.models import Q
 from drf_spectacular.utils import OpenApiParameter, OpenApiTypes, extend_schema, extend_schema_view
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, permissions
 from .models import Room, House
 from .serializers import RoomSerializer, HouseSerializer
 
@@ -95,6 +95,15 @@ def apply_room_filters(queryset, query_params):
 
     return queryset
 
+class HouseViewSet(viewsets.ModelViewSet):
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -122,7 +131,3 @@ class AvailableRoomList(generics.ListAPIView):
     def get_queryset(self):
         queryset = Room.objects.filter(vacant_units__gt=0).select_related('house')
         return apply_room_filters(queryset, self.request.query_params)
-
-class HouseViewSet(viewsets.ModelViewSet):
-    queryset = House.objects.all()
-    serializer_class = HouseSerializer
