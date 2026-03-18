@@ -3,7 +3,7 @@ from users.models import CustomUser
 from houses.models import Room
 
 class Review(models.Model):
-    reviewer = models.ForeignKey(CustomUser,on_delete=models.CASCADE, related_name='reviews')
+    reviewer = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='rooms')
     rating = models.IntegerField(default=5)
     comment = models.TextField(blank=True)

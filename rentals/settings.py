@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'bookings',
     'reviews',
+    'payments',
 ]
 
 MIDDLEWARE = [

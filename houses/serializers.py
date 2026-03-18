@@ -7,9 +7,9 @@ class HouseSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'location', 'description', 'owner']
 
 class RoomSerializer(serializers.ModelSerializer):
-    picture = serializers.ImageField(required=False, allow_null=True, use_url=True)
+    #picture = serializers.ImageField(required=False, allow_null=True, use_url=True)
     status = serializers.ReadOnlyField()
 
     class Meta:
         model = Room
-        fields = ['id', 'house', 'type', 'category', 'rent', 'picture', 'deposit_required', 'utilities_included', 'status']
+        fields = ['id', 'house', 'type', 'category', 'rent', 'deposit_required', 'utilities_included', 'status']

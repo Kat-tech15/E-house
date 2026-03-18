@@ -30,7 +30,7 @@ class Room(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='houses')
     category = models.CharField(max_length=15, choices=OWNER_TYPES, default='landlord')
     type = models.CharField(max_length=15, choices=ROOM_TYPES, default='single_room')
-    picture = models.ImageField(upload_to='images/', blank=True,null=True)
+    #picture = models.ImageField(upload_to='images/', blank=True,null=True)
     rent = models.DecimalField(max_digits=10, decimal_places=2)
     deposit_required = models.BooleanField(default=True)
     utilities_included = models.CharField(max_length=100)
@@ -51,4 +51,4 @@ class Room(models.Model):
 
     def save(self, *args, **kwargs):
         self.full_clean()
-        super().sae(*args, **kwargs)
+        super().save(*args, **kwargs)

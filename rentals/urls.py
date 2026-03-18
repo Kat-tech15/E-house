@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/houses/', include('houses.urls')),
     path('api/bookings/', include('bookings.urls')),
     path('api/reviews/', include('reviews.urls')),
+    path('api/payments/', include('payments.urls')),
     path('', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/redoc/', SpectacularRedocView.as_view(), name='redoc'),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
