@@ -14,13 +14,19 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password']
         )
-        user.is_active = True
+        user.is_active = False
+        user.is_email_verified = False
         user.save()
         return user
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
+
+
+class VerifyEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    verification_code = serializers.CharField(max_length=6)
 
 class EmptySerializer(serializers.Serializer):
     pass
